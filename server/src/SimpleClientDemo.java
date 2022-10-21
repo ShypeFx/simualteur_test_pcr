@@ -18,11 +18,8 @@ public class SimpleClientDemo {
            // Send a request to connect to the server is listening
            // on machine 'localhost' port 9999.
            socketOfClient = new Socket(serverHost, 9999);
-
            // Create output stream at the client (to send data to the server)
            os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
-
-
            // Input stream at Client (Receive data from the server).
            is = new BufferedReader(new InputStreamReader(socketOfClient.getInputStream()));
 
@@ -35,13 +32,10 @@ public class SimpleClientDemo {
        }
 
        try {
-
            // Write data to the output stream of the Client Socket.
-           os.write("PCR 000000");
- 
+           os.write("000000 10jours");
            // End of line
            os.newLine();
-   
            // Flush data.
            os.flush();  
 
