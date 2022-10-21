@@ -31,7 +31,6 @@ public class SimpleServerProgram {
 
        try {
            System.out.println("Server is waiting to accept user...");
-
            // Accept client connection request
            // Get new Socket at Server.    
            socketOfServer = listener.accept();
@@ -48,22 +47,21 @@ public class SimpleServerProgram {
                
                // Write to socket of Server
                // (Send to client)
-               os.write(">> " + line);
+               os.write(" client : " + line);
                
                // End of line
                os.newLine();
                // Flush data.
                os.flush();  
                
-               String [] client_line = line.split(" ");
+               String [] client_line = line.split("\\s+");
                String pcr_client_number = client_line[1];
-               String validity_time = client_line[2];
+               //String validity_time = client_line[2];
                
-               os.write(pcr_client_number + " ");
-               os.write(validity_time);
+               //os.write(validity_time);
                os.newLine();
                
-               FileReader fileR = new FileReader("C:\\Users\\PC\\eclipse-workspace\\test_serveur_client\\src\\test_serveur_client\\list_pcr.txt");
+               FileReader fileR = new FileReader("C:\\Users\\PC\\Desktop\\2022-2023\\Java\\Project\\simualteur_test_pcr\\server\\src\\list_pcr.txt");
                BufferedReader buffR = new BufferedReader(fileR);
                
                String l_file;
@@ -71,15 +69,21 @@ public class SimpleServerProgram {
                
                while( ( l_file = buffR.readLine()) != null) {
             	   
-            	   String [] file_line = l_file.split(" ");
-            	   if(file_line[0] == pcr_client_number) {
+            	   String [] file_line = l_file.split("\\s+");
+            	   
+            	   if(file_line[0].toString() == pcr_client_number) {
+            		   os.write("OKAY");
+            	   }
+            	   
+            	   if(file_line[0].toString() == pcr_client_number) {
+            		   
             		   System.out.println(" WORKING ");
             		   os.write(" Working with number : '"+ pcr_client_number+"'");
             		   os.newLine();
             		   os.flush();
             	   }else {
             		   System.out.println(" Not Matching Number ");
-            		   os.write(" This number don't work : '"+ file_line[0]+"'");
+            		   os.write(" This number don't work");
             		   os.newLine();
             		   os.flush();
             	   }
