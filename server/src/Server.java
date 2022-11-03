@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class SimpleServerProgram {
+public class Server {
 
    public static void main(String args[]) {
 

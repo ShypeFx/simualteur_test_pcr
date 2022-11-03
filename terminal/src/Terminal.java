@@ -2,7 +2,7 @@
 import java.io.*;
 import java.net.*;
 
-public class SimpleClientDemo {
+public class Terminal {
 
    public static void main(String[] args) {
 

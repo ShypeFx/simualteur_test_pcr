@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/simualteur_test_pcr.iml" filepath="$PROJECT_DIR$/.idea/simualteur_test_pcr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/terminal/terminal.iml" filepath="$PROJECT_DIR$/terminal/terminal.iml" />
     </modules>
   </component>
 </project>
