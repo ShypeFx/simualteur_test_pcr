@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Server {
@@ -35,6 +36,9 @@ public class Server {
            is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
            os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
 
+           DataBaseConnect db_co = new DataBaseConnect();
+
+
            while (true) {
                // Read data to the server (sent from client).
                line = is.readLine();
@@ -62,6 +66,7 @@ public class Server {
             	   String [] file_line = l_file.split("\\s+");
                    //System.out.println(" file_line : "+Arrays.toString(file_line));
 
+                   db_co.Check_ID(pcr_client_number);
 
             	   if(file_line[0].equals(pcr_client_number)) {
             		   System.out.println(" WORKING ");
@@ -76,9 +81,6 @@ public class Server {
             	   }
             	   
                }
-               
-
-
                // If users send QUIT (To end conversation).
                if (line.equals("QUIT")) {
                    os.write(">> OK");
@@ -90,6 +92,10 @@ public class Server {
 
        } catch (IOException e) {
            System.out.println(e);
+           e.printStackTrace();
+       } catch (SQLException e) {
+           e.printStackTrace();
+       } catch (ClassNotFoundException e) {
            e.printStackTrace();
        }
        System.out.println("Sever stopped!");
