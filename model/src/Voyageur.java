@@ -1,5 +1,3 @@
-import jdk.incubator.vector.VectorOperators;
-
 public class Voyageur {
 
     private String first_name;

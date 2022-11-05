@@ -1,12 +1,5 @@
-import java.sql.SQLException;
-
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
+    public static void main(String[] args) {
         System.out.println("Hello world!");
-
-        DataBaseConnect db = new DataBaseConnect();
-        db.Check_ID("000000");
-
     }
 }
