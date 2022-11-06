@@ -1,5 +1,3 @@
-import jdk.incubator.vector.VectorOperators;
-
 public class Voyageur {
 
     private String first_name;
@@ -7,6 +5,7 @@ public class Voyageur {
     private String nationality;
     private int age;
     private Test_PCR pcr;
+    private int validy_test;
 
 
 }
