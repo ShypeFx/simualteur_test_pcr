@@ -5,6 +5,7 @@ public class Voyageur {
     private String nationality;
     private int age;
     private Test_PCR pcr;
+    private int validy_test;
 
 
 }

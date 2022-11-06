@@ -19,8 +19,8 @@ public class DatabaseConnect {
 
 
 
-    public static String Check_ID(String num) throws SQLException, ClassNotFoundException {
-        String value = "";
+    public static Boolean Check_ID(String num) throws SQLException, ClassNotFoundException {
+        Boolean value = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con=DriverManager.getConnection(url,user,pass);
@@ -29,11 +29,10 @@ public class DatabaseConnect {
             ResultSet rs = ps.executeQuery();
             // Check the response of the SQL REQUEST
             if (rs.next()) {
-                value = num + " = ID EXIST";
+                value = true;
             } else {
-                value = num + " = ID DOESNT EXIST";
+                value = false;
             }
-            System.out.println(value);
         }
         catch (Exception e) {
             e.printStackTrace();

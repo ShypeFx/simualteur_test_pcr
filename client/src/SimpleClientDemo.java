@@ -33,11 +33,11 @@ public class SimpleClientDemo {
 
        try {
            // Write data to the output stream of the Client Socket.
-           os.write("000000 10jours");
+           os.write("1791242 15days");
            // End of line
            os.newLine();
            // Flush data.
-           os.flush();  
+           os.flush();
 
            // Read data sent from the server.
            // By reading the input stream of the Client Socket.
