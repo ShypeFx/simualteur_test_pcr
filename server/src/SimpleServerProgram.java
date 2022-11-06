@@ -51,7 +51,10 @@ public class SimpleServerProgram {
                // DB CONNECTION
                DatabaseConnect db = new DatabaseConnect();
                db.getAllValue();
-               db.Check_ID(pcr_client_number);
+              Boolean val = db.Check_ID(pcr_client_number);
+               if (val==true){
+                   db.Check_Status(pcr_client_number);
+               }
 
 
 

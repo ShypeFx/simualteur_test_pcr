@@ -40,7 +40,29 @@ public class DatabaseConnect {
         return value;
     }
 
-
+    public static Boolean Check_Status(String num) throws SQLException, ClassNotFoundException {
+        Boolean value = null;
+        String stat = "NEGATIVE";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection(url,user,pass);
+            PreparedStatement ps = con.prepareStatement("SELECT status FROM pcr_base WHERE id = ? and status = ? ");
+            ps.setString(1, num);
+            ps.setString(2,stat);
+            ResultSet rs = ps.executeQuery();
+            // Check the response of the SQL REQUEST
+            if (rs.next()) {
+                value = true;
+            } else {
+                value = false;
+            }
+            System.out.println(value);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
     public static void getAllValue(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
