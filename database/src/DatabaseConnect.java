@@ -50,7 +50,6 @@ public class DatabaseConnect {
         return value;
     }
 
-
     public static Boolean Check_Status(String num) throws SQLException, ClassNotFoundException {
         Boolean value = null;
         String stat = "NEGATIVE";
@@ -73,7 +72,7 @@ public class DatabaseConnect {
             e.printStackTrace();
         }
         return value;
-    }
+
 
     public static Boolean Check_Validity_Date(String num, int time_validity) throws ParseException {
         // Current Date
@@ -124,6 +123,7 @@ public class DatabaseConnect {
         }
         return value;
     }
+
 
 
     public static void getAllValue(){
