@@ -7,7 +7,9 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
 
 public class SimpleServerProgram {
 
@@ -46,12 +48,41 @@ public class SimpleServerProgram {
                // get only the PCR number
                String [] client_line = line.split("\\s+");
                String pcr_client_number = client_line[0];
-               String pcr_client_date = client_line[1];
+               int pcr_validity_time = Integer.parseInt(client_line[1]);
 
                // DB CONNECTION
                DatabaseConnect db = new DatabaseConnect();
+               Date test_date = db.getDate(pcr_client_number);
                db.getAllValue();
                db.Check_ID(pcr_client_number);
+
+              Boolean val = db.Check_ID(pcr_client_number);
+               if (val){
+                   if(db.Check_Status(pcr_client_number)){
+                       if(db.Check_Validity_Date(pcr_client_number,pcr_validity_time)){
+                           System.out.println(" ------------------------ WORKING ------------------------");
+                           System.out.println(" Le test numero '"+pcr_client_number+"' est VALIDE ");
+                           System.out.println(" Date du test = "+db.getDate(pcr_client_number));
+                           System.out.println(" Date + duree de validite = "+db.getDatePlusValidityFormater(test_date,pcr_validity_time));
+                           System.out.println(" Date actuel = "+db.getCurentDateFormater());
+                           System.out.println("----------------------------------------------------------");
+                       }else{
+                           System.out.println(" ------------------------ WARNING ------------------------");
+                           System.out.println(" Le test numero '"+pcr_client_number+"' n'est plus valide ");
+                           System.out.println(" Date du test = "+db.getDate(pcr_client_number));
+                           System.out.println(" Date actuel = "+db.getCurentDateFormater());
+                           System.out.println("----------------------------------------------------------");
+                       }
+                   }else{
+                       System.out.println(" ------------------------ WARNING ------------------------");
+                       System.out.println(" Le test numero '"+pcr_client_number+"' est POSITIF au COVID-19");
+                       System.out.println("----------------------------------------------------------");
+                   }
+               }else{
+                   System.out.println(" ------------------------ WARNING ------------------------");
+                   System.out.println(" Le test numero '"+pcr_client_number+"' n'existe pas");
+                   System.out.println("----------------------------------------------------------");
+               }
 
 
 
@@ -67,6 +98,8 @@ public class SimpleServerProgram {
 
        } catch (IOException | SQLException | ClassNotFoundException e) {
            System.out.println(e);
+           e.printStackTrace();
+       } catch (ParseException e) {
            e.printStackTrace();
        }
        System.out.println("Sever stopped!");
