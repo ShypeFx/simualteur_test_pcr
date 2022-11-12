@@ -53,12 +53,12 @@ public class DatabaseConnect {
     public static Boolean Check_Status(String num) throws SQLException, ClassNotFoundException {
         Boolean value = null;
         String stat = "NEGATIVE";
-        try{
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection(url,user,pass);
+            con = DriverManager.getConnection(url, user, pass);
             PreparedStatement ps = con.prepareStatement("SELECT status FROM pcr_base WHERE id = ? and status = ? ");
             ps.setString(1, num);
-            ps.setString(2,stat);
+            ps.setString(2, stat);
             ResultSet rs = ps.executeQuery();
             // Check the response of the SQL REQUEST
             if (rs.next()) {
@@ -67,11 +67,11 @@ public class DatabaseConnect {
                 value = false;
             }
             System.out.println(value);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return value;
+    }
 
 
     public static Boolean Check_Validity_Date(String num, int time_validity) throws ParseException {
