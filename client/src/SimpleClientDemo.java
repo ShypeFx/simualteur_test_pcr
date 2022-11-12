@@ -33,7 +33,7 @@ public class SimpleClientDemo {
 
        try {
            // Write data to the output stream of the Client Socket.
-           os.write("1791242 15days");
+           os.write("1791242 4");
            // End of line
            os.newLine();
            // Flush data.
