@@ -32,11 +32,11 @@ Ce projet à pour but de développer une application en connexion avec un serveu
 
 ### _Functions_ ###
 
- - [ ] Implementation of DAO
- - [ ] Check DATA Implementation ( GET )
- - [ ] Update DATA Implementation ( UPDATE )
- - [ ] Delete DATA Implementation ( DELETE )
- - [ ] Send DATA Implementation ( POST )
- - [ ] Send Response 
+ - [X] Implementation of DAO
+ - [X] Check DATA Implementation ( GET )
+ - [X] Update DATA Implementation ( UPDATE )
+ - [X] Delete DATA Implementation ( DELETE )
+ - [X] Send DATA Implementation ( POST )
+ - [X] Send Response 
  - [ ] Errors Manage
  - [ ] Clean Code
