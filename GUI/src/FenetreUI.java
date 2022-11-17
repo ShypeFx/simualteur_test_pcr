@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Fenetre extends JFrame {
-
+public class FenetreUI extends JFrame {
+   public static JTextField text1 = new JTextField();
     public static void main(String[] args){
         setFenetre();
         textField();
@@ -28,8 +29,7 @@ public class Fenetre extends JFrame {
 
     public static void textField(){
 
-        JTextField text1 = new JTextField();
-        JTextField text2 = new JTextField();
+
         JLabel label1 = new JLabel();
         JButton btn;
         label1.setBounds(20,50,100,30);
@@ -39,8 +39,14 @@ public class Fenetre extends JFrame {
         label1.setText("N° PCR : ");
         btn = new JButton("VERIFIER");
         btn.setBounds(100,140,100,40);
-
-        btn.addActionListener(actionPerformed());
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Label label = new Label();
+               label.setText("null");//SimpleServerProgram.essai());
+               maFenetre.add(label);
+            }
+                              });
 
 
         maFenetre.add(label1);
@@ -51,13 +57,20 @@ public class Fenetre extends JFrame {
         maFenetre.setLayout(null);
         maFenetre.setVisible(true);
     }
-    public static ActionListener actionPerformed() {
-        SimpleServerProgram ssp = new SimpleServerProgram();
+    public static JTextField getText1(){
+        return text1;
+
+    }
+   // public static ActionListener actionPerformed() {
+     //   new setFenetre();
+       // return (ActionListener) text1;
+        /*SimpleServerProgram ssp = new SimpleServerProgram();
         setFenetre();
         Label label = new Label("");
         label.setBounds(80,80,100,30);
-        label.setText(ssp.toString());
+        System.out.println(ssp.toString());
+        label.setText("hey");
         maFenetre.add(label);
-        return (ActionListener) maFenetre;
-    }
+        return (ActionListener) maFenetre;*/
+    //}
 }

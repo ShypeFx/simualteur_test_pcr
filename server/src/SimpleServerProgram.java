@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -8,12 +7,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Date;
 
 public class SimpleServerProgram {
 
-   public static void main(String args[]) {
+   public static void essai() {
 
        ServerSocket listener = null;
        String line;
@@ -54,10 +52,6 @@ public class SimpleServerProgram {
                DatabaseConnect db = new DatabaseConnect();
                Date test_date = db.getDate(pcr_client_number);
                db.getAllValue();
-              Boolean val = db.Check_ID(pcr_client_number);
-               if (val==true){
-                   db.Check_Status(pcr_client_number);
-               }
 
               Boolean val = db.Check_ID(pcr_client_number);
                if (val){
