@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 
@@ -13,8 +14,9 @@ public class SimpleClientDemo {
        BufferedWriter os = null;
        BufferedReader is = null;
 
+       FenetreUI wind = new FenetreUI();
+
        try {
-           
            // Send a request to connect to the server is listening
            // on machine 'localhost' port 9999.
            socketOfClient = new Socket(serverHost, 9999);
@@ -32,8 +34,9 @@ public class SimpleClientDemo {
        }
 
        try {
+
            // Write data to the output stream of the Client Socket.
-           os.write("1791242 15days");
+           os.write("wind.getText1().toString()");
            // End of line
            os.newLine();
            // Flush data.
