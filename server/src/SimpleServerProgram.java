@@ -7,37 +7,27 @@ import java.util.Date;
 
 public class SimpleServerProgram {
 
-    public static void main(String [] args) {
+    public static void main(String [] args) throws IOException {
 
-        ServerSocket listener = null;
         String line;
         BufferedReader is;
         BufferedWriter os;
         Socket socketOfServer = null;
 
-        try {
-            listener = new ServerSocket(9999);
-        } catch (IOException e) {
-            System.out.println(e);
-            System.exit(1);
-        }
+        ServerSocket listener = new ServerSocket(9999);
+        System.out.println(" Server is waiting to accept user...");
+
 
         try {
-            System.out.println(" Server is waiting to accept user...");
-            // Accept client connection request
-            // Get new Socket at Server.
             socketOfServer = listener.accept();
-            System.out.println(" Accept a client!");
-            // Open input and output streams
+
+            //
             is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
             os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
             PrintWriter out = new PrintWriter(socketOfServer.getOutputStream(), true);
 
             while (true) {
-                // Read data to the server (sent from client).
                 line = is.readLine();
-                // Write to socket of Server
-                // (Send by the client)
                 System.out.println("send by client : " + line);
 
                 // get only the PCR number
@@ -49,8 +39,6 @@ public class SimpleServerProgram {
                 DatabaseConnect db = new DatabaseConnect();
                 Date test_date = db.getDate(pcr_client_number);
                 db.getAllValue();
-
-
 
                 Boolean val = db.Check_ID(pcr_client_number);
                 if (val){
@@ -89,9 +77,6 @@ public class SimpleServerProgram {
                     System.out.println("----------------------------------------------------------");
                     out.println("red");
                 }
-
-
-
 
                 // If users send QUIT (To end conversation).
                 if (line.equals("QUIT")) {
