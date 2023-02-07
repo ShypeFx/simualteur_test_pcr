@@ -24,7 +24,7 @@ public class DatabaseConnect {
     public DatabaseConnect (){
     }
 
-   public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException {
         Check_Validity_Date("1791242",3);
     }
 
@@ -142,7 +142,29 @@ public class DatabaseConnect {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public static String getStatus(String num){
+        String value = "";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection(url,user,pass);
+            PreparedStatement ps = con.prepareStatement("SELECT status FROM pcr_base WHERE id = ? ");
+            ps.setString(1, num);
+            ResultSet rs = ps.executeQuery();
+            // Check the response of the SQL REQUEST
+            if(rs.next()){
+                value = rs.getString(1);
+            }else{
+                value = null;
+            }
+
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
     }
 
     public static Date getDatePlusValidity(Date d, int validity){
