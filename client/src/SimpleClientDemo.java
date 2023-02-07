@@ -1,4 +1,5 @@
 
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 
@@ -32,8 +33,9 @@ public class SimpleClientDemo {
        }
 
        try {
+
            // Write data to the output stream of the Client Socket.
-           os.write("1791242 4");
+           os.write(FenetreUI.getText1().toString()+" 4");
            // End of line
            os.newLine();
            // Flush data.
