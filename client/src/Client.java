@@ -32,6 +32,7 @@ public class Client extends JFrame implements ActionListener {
         add(numero2);
         add(bouton);
         add(resultat);
+<<<<<<< Updated upstream
         bouton.addActionListener(this);
     }
 
@@ -50,9 +51,48 @@ public class Client extends JFrame implements ActionListener {
             }
             validate();
             repaint();
+=======
+        add(date_res);
 
-        } catch (Exception ex) {
-            System.out.println(ex);
+    bouton.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (numero1.getText().length()<=0 || numero2.getText().length()<=0){
+            JOptionPane.showMessageDialog(null, "Les champs sont vides veuillez les remplirs");
+        }else {
+            try {
+
+
+                Socket socket = new Socket("localhost", 9090);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out.println(numero1.getText() + " " + numero2.getText());
+
+                String response = in.readLine();
+
+                if (response.equals("green")) {
+                    getContentPane().setBackground(Color.GREEN);
+                    date_res.setText(in.readLine());
+                    resultat.setText(in.readLine());
+                    System.out.println(" test pcr fonctionnel ");
+>>>>>>> Stashed changes
+
+                } else if (response.equals("red")) {
+                    getContentPane().setBackground(Color.RED);
+                    date_res.setText(in.readLine());
+                    resultat.setText(in.readLine());
+                    System.out.println(" test pcr non ");
+                } else {
+                    getContentPane().setBackground(Color.PINK);
+                    System.out.println(" test pcr non ");
+                }
+                validate();
+                repaint();
+
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
         }
     }
 
@@ -72,4 +112,4 @@ public class Client extends JFrame implements ActionListener {
 
         client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-}
+  }
