@@ -35,35 +35,39 @@ public class Client extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        try {
-            Socket socket = new Socket("localhost", 9090);
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out.println(numero1.getText() + " " + numero2.getText());
+         if (numero1.getText().length()<=0 || numero2.getText().length()<=0){
+            JOptionPane.showMessageDialog(null, "Les champs sont vides veuillez les remplirs");
+        } else {
+            try {
+                Socket socket = new Socket("localhost", 9090);
+                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out.println(numero1.getText() + " " + numero2.getText());
 
-            String response = in.readLine();
+                String response = in.readLine();
 
-            if(response.equals("green")){
-                getContentPane().setBackground(Color.GREEN);
-                date_res.setText(in.readLine());
-                resultat.setText(in.readLine());
-                System.out.println(" test pcr fonctionnel ");
+                if(response.equals("green")){
+                    getContentPane().setBackground(Color.GREEN);
+                    date_res.setText(in.readLine());
+                    resultat.setText(in.readLine());
+                    System.out.println(" test pcr fonctionnel ");
 
-            }else if(response.equals("red")){
-                getContentPane().setBackground(Color.RED);
-                date_res.setText(in.readLine());
-                resultat.setText(in.readLine());
-                System.out.println(" test pcr non ");
-            }else{
-                getContentPane().setBackground(Color.PINK);
-                System.out.println(" test pcr non ");
+                }else if(response.equals("red")){
+                    getContentPane().setBackground(Color.RED);
+                    date_res.setText(in.readLine());
+                    resultat.setText(in.readLine());
+                    System.out.println(" test pcr non ");
+                }else{
+                    getContentPane().setBackground(Color.PINK);
+                    System.out.println(" test pcr non ");
+                }
+                validate();
+                repaint();
+
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
-            validate();
-            repaint();
-
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+         }
     }
 
     public static void main(String[] args) {
