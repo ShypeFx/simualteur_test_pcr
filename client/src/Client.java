@@ -57,7 +57,7 @@ public class Client extends JFrame implements ActionListener {
 
                 if(response.equals("green")){
                     getContentPane().setBackground(new Color(0,200,0));
-                    log.setBackground(Color.GREEN);
+                    log.setBackground(new Color(0,200,0));
                     date_res.setText(in.readLine());
                     resultat.setText(in.readLine());
                     resultatPcr = "Positif";
@@ -97,6 +97,5 @@ public class Client extends JFrame implements ActionListener {
         client.setSize(600, 450);
         client.setVisible(true);
         client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 }
