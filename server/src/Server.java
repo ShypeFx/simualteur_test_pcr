@@ -106,10 +106,12 @@ public class Server {
                     }else{
                         System.out.println(" ------------------------ WARNING ------------------------");
                         System.out.println(" Le test numero '"+pcr_client_number+"' n'existe pas");
+                        System.out.println(" resultat : PCR inconnu");
+                        System.out.println("date test : Invalide");
                         System.out.println("----------------------------------------------------------");
                         out.println("purple");
-                        out.println(" date test : ");
-                        out.println(" resultat : ");
+                        out.println(" date test : Invalide ");
+                        out.println(" resultat : PCR inconnu");
                     }
                 }
                 // Prise en compte des erreurs possible

@@ -26,7 +26,7 @@ public class DatabaseConnect {
 
 
     public static Boolean Check_ID(String num) throws SQLException, ClassNotFoundException {
-        Boolean value = null;
+        Boolean value = false;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con=DriverManager.getConnection(url,user,pass);

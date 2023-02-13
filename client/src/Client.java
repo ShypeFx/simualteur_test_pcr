@@ -134,8 +134,10 @@ public class Client extends JFrame implements ActionListener {
                 } else {
                     frame.getContentPane().setBackground(new Color(102, 0, 102));
                     log.setBackground(new Color(102, 0, 102));
+                    date_res.setText(in.readLine());
+                    resultat.setText(in.readLine());
                     resultatPcr = "Pcr inconnu";
-                    System.out.println(" test pcr non ");
+                    System.out.println(" test pcr inconnu ");
                 }
 
                 events.add(numero1.getText() + " " + numero2.getText() + " " + resultatPcr);
