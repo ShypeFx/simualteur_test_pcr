@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+
 public class Client extends JFrame implements ActionListener {
     private JTextField numero1;
     private JLabel label1;
@@ -13,37 +14,89 @@ public class Client extends JFrame implements ActionListener {
     private JButton bouton;
     private JLabel resultat;
     private JLabel date_res;
+    StringBuilder sb = new StringBuilder();
+
     ArrayList<String> events = new ArrayList<String>();
     private JTextArea  log;
+    JFrame frame = new JFrame();
 
-
-
-    public Client() {
+    Container contentPane = frame.getContentPane();
+    BoxLayout boxLayout = new BoxLayout(contentPane, BoxLayout.Y_AXIS);
+    public Client()  {
         super("Client");
-        setLayout(new FlowLayout());
-        label1 = new JLabel(" Numero pcr : ");
-        label2 = new JLabel(" Jour validite : ");
+
+        frame.setSize(450,350);
+        frame.setResizable(false);
+
+        contentPane.setLayout(boxLayout);
+
+        JPanel pcrPanel = new JPanel();
+        label1 = new JLabel("Numéro pcr : ");
         numero1 = new JTextField(10);
+        pcrPanel.add(label1);
+        pcrPanel.add(numero1);
+
+        JPanel jourPanel = new JPanel();
+        label2 = new JLabel("Jour validité :");
         numero2 = new JTextField(10);
+        jourPanel.add(label2);
+        jourPanel.add(numero2);
+
         bouton = new JButton("Envoyer");
+
+        JPanel resultPanel = new JPanel();
         resultat = new JLabel();
         date_res = new JLabel();
-        log = new JTextArea ();
+        resultPanel.add(resultat);
+        resultPanel.add(date_res);
+
+        pcrPanel.setOpaque(false);
+        jourPanel.setOpaque(false);
+        resultPanel.setOpaque(false);
+
+        log = new JTextArea();
         log.setEditable(false);
 
-        add(label1);
-        add(numero1);
-        add(label2);
-        add(numero2);
-        add(bouton);
-        add(resultat);
-        add(date_res);
-        add(log);
+        label1.setForeground(Color.BLACK);
+        label2.setForeground(Color.BLACK);
+        resultat.setForeground(Color.BLACK);
+        date_res.setForeground(Color.BLACK);
+        log.setForeground(Color.BLACK);
+
+        bouton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        contentPane.add(pcrPanel);
+        contentPane.add(jourPanel);
+        contentPane.add(bouton);
+        contentPane.add(resultPanel);
+        contentPane.add(log);
+
         bouton.addActionListener(this);
+        //frame.pack();
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /* private void enregistrerLog(String log) throws SQLException {
+         Connection connection = DatabaseConnect.DatabaseConnection();
+         try (connection) {
+             PreparedStatement statement = (PreparedStatement) connection.prepareStatement("INSERT INTO log (message) VALUES (?)");
+             statement.setString(1, log);
+             statement.executeUpdate();
+         } catch (SQLException e) {
+             throw new RuntimeException(e);
+         }
+     }*/
     public void actionPerformed(ActionEvent e) {
-        if (numero1.getText().length()<=0 || numero2.getText().length()<=0){
+        if (numero1.getText().length() != 6) {
+            if (numero1.getText().length() <= 0) {
+                JOptionPane.showMessageDialog(null, "Le champ n°PCR est vide");
+            } else if (numero1.getText().length() <= 6) {
+                JOptionPane.showMessageDialog(null, "Il manque des chiffres au n°PCR");
+            } else {
+                JOptionPane.showMessageDialog(null, "Il y a trop des chiffres au n°PCR");
+            }
+        } else if (numero2.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null, "Les champs sont vides veuillez les remplirs");
         } else {
             try {
@@ -55,33 +108,43 @@ public class Client extends JFrame implements ActionListener {
 
                 String response = in.readLine();
 
-                if(response.equals("green")){
-                    getContentPane().setBackground(new Color(0,200,0));
-                    log.setBackground(new Color(0,200,0));
+                if (response.equals("green")) {
+                    contentPane.setBackground(new Color(0, 194, 62));
+                    log.setBackground(new Color(0, 194, 62));
                     date_res.setText(in.readLine());
                     resultat.setText(in.readLine());
-                    resultatPcr = "Positif";
+                    resultatPcr = "Négative";
                     System.out.println(" test pcr fonctionnel ");
 
-                }else if(response.equals("red")){
-                    getContentPane().setBackground(new Color(200,0,0));
-                    log.setBackground(new Color(200,0,0));
+                } else if (response.equals("red")) {
+
+                    contentPane.setBackground(new Color(200, 0, 0));
+                    log.setBackground(new Color(200, 0, 0));
                     date_res.setText(in.readLine());
                     resultat.setText(in.readLine());
-                    resultatPcr = "Négatif";
+                    resultatPcr = "Positive";
                     System.out.println(" test pcr non ");
-                }else{
-                    getContentPane().setBackground(Color.PINK);
-                    log.setBackground(Color.PINK);
+                } else if (response.equals("orange")) {
+                    contentPane.setBackground(new Color(255, 128, 0));
+                    log.setBackground(new Color(255, 128, 0));
+                    date_res.setText(in.readLine());
+                    resultat.setText(in.readLine());
+                    resultatPcr = "Non valide";
+                    System.out.println("Le test PCR n'est plus valide");
+                } else {
+                    frame.getContentPane().setBackground(new Color(102, 0, 102));
+                    log.setBackground(new Color(102, 0, 102));
                     resultatPcr = "Pcr inconnu";
                     System.out.println(" test pcr non ");
                 }
-                events.add(numero1.getText() + " " + numero2.getText()+" "+resultatPcr);
+
+                events.add(numero1.getText() + " " + numero2.getText() + " " + resultatPcr);
                 StringBuilder sb = new StringBuilder();
                 for (String event : events) {
                     sb.append(event).append("\n");
                 }
                 log.setText(sb.toString());
+                // enregistrerLog(log.getText());
 
                 validate();
                 repaint();
@@ -91,11 +154,8 @@ public class Client extends JFrame implements ActionListener {
             }
         }
     }
-
-    public static void main(String[] args) {
-        Client client = new Client();
-        client.setSize(600, 450);
-        client.setVisible(true);
-        client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public static void main(String[] args) throws ClassNotFoundException {
+        new Client();
     }
 }
+

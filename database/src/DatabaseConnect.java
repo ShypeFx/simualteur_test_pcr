@@ -1,27 +1,23 @@
-import jdk.jshell.Snippet;
-
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Calendar;
 
 public class DatabaseConnect {
-    protected static String url = "jdbc:mysql://mysql-tbeaudoin.alwaysdata.net:3306/tbeaudoin_pcr_base";
-    protected static String user = "tbeaudoin";
-    protected static String pass = "ESME_Projets2022";
-    protected static Connection con;
+    public static String url = "jdbc:mysql://mysql-tbeaudoin.alwaysdata.net:3306/tbeaudoin_pcr_base";
+    public static String user = "tbeaudoin";
+    public static String pass = "ESME_Projets2022";
+    public static Connection con;
 
     public DatabaseConnect(String url, String user, String pass) throws SQLException {
         this.url = url;
         this.user = user;
         this.pass = pass;
     }
-
-    public DatabaseConnect (){
+    public DatabaseConnect(){}
+    public static Connection DatabaseConnection() throws SQLException {
+       return DriverManager.getConnection(url, user, pass);
     }
 
     public static void main(String[] args) throws ParseException {
