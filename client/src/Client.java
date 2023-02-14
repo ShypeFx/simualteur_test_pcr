@@ -25,6 +25,8 @@ public class Client extends JFrame implements ActionListener {
     StringBuilder sb = new StringBuilder();
     public Client()  {
         super("Client");
+        frame.setBackground(Color.DARK_GRAY);
+        contentPane.setBackground(Color.DARK_GRAY);
 
         frame.setSize(450,350);
         frame.setResizable(false);
@@ -51,17 +53,19 @@ public class Client extends JFrame implements ActionListener {
         resultPanel.add(resultat);
         resultPanel.add(date_res);
         resultPanel.setOpaque(false);
+        resultPanel.setBackground(Color.DARK_GRAY);
 
         bouton = new JButton("Envoyer");
 
         log = new JTextArea();
         log.setEditable(false);
+        log.setBackground(Color.DARK_GRAY);
 
-        label1.setForeground(Color.BLACK);
-        label2.setForeground(Color.BLACK);
-        resultat.setForeground(Color.BLACK);
-        date_res.setForeground(Color.BLACK);
-        log.setForeground(Color.BLACK);
+        label1.setForeground(Color.WHITE);
+        label2.setForeground(Color.WHITE);
+        resultat.setForeground(Color.WHITE);
+        date_res.setForeground(Color.WHITE);
+        log.setForeground(Color.WHITE);
 
         bouton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -127,6 +131,7 @@ public class Client extends JFrame implements ActionListener {
                         resultat.setText(in.readLine());
                         resultatPcr = "Pcr inconnu";
                         System.out.println(" test pcr inconnu ");
+
                     }
 
                     events.add(numero1.getText() + " " + numero2.getText() + " " + resultatPcr);
