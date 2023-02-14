@@ -14,14 +14,15 @@ public class Client extends JFrame implements ActionListener {
     private JButton bouton;
     private JLabel resultat;
     private JLabel date_res;
-    StringBuilder sb = new StringBuilder();
+    private JTextArea  log;
 
     ArrayList<String> events = new ArrayList<String>();
-    private JTextArea  log;
+
     JFrame frame = new JFrame();
 
     Container contentPane = frame.getContentPane();
     BoxLayout boxLayout = new BoxLayout(contentPane, BoxLayout.Y_AXIS);
+    StringBuilder sb = new StringBuilder();
     public Client()  {
         super("Client");
 
@@ -35,24 +36,23 @@ public class Client extends JFrame implements ActionListener {
         numero1 = new JTextField(10);
         pcrPanel.add(label1);
         pcrPanel.add(numero1);
+        pcrPanel.setOpaque(false);
 
         JPanel jourPanel = new JPanel();
         label2 = new JLabel("Jour validité :");
         numero2 = new JTextField(10);
         jourPanel.add(label2);
         jourPanel.add(numero2);
-
-        bouton = new JButton("Envoyer");
+        jourPanel.setOpaque(false);
 
         JPanel resultPanel = new JPanel();
         resultat = new JLabel();
         date_res = new JLabel();
         resultPanel.add(resultat);
         resultPanel.add(date_res);
-
-        pcrPanel.setOpaque(false);
-        jourPanel.setOpaque(false);
         resultPanel.setOpaque(false);
+
+        bouton = new JButton("Envoyer");
 
         log = new JTextArea();
         log.setEditable(false);
@@ -72,21 +72,10 @@ public class Client extends JFrame implements ActionListener {
         contentPane.add(log);
 
         bouton.addActionListener(this);
-        //frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /* private void enregistrerLog(String log) throws SQLException {
-         Connection connection = DatabaseConnect.DatabaseConnection();
-         try (connection) {
-             PreparedStatement statement = (PreparedStatement) connection.prepareStatement("INSERT INTO log (message) VALUES (?)");
-             statement.setString(1, log);
-             statement.executeUpdate();
-         } catch (SQLException e) {
-             throw new RuntimeException(e);
-         }
-     }*/
     public void actionPerformed(ActionEvent e) {
         if (numero1.getText().length() != 6) {
             if (numero1.getText().length() <= 0) {
@@ -115,9 +104,7 @@ public class Client extends JFrame implements ActionListener {
                     resultat.setText(in.readLine());
                     resultatPcr = "Négative";
                     System.out.println(" test pcr fonctionnel ");
-
                 } else if (response.equals("red")) {
-
                     contentPane.setBackground(new Color(200, 0, 0));
                     log.setBackground(new Color(200, 0, 0));
                     date_res.setText(in.readLine());
@@ -146,7 +133,6 @@ public class Client extends JFrame implements ActionListener {
                     sb.append(event).append("\n");
                 }
                 log.setText(sb.toString());
-                // enregistrerLog(log.getText());
 
                 validate();
                 repaint();
@@ -159,5 +145,15 @@ public class Client extends JFrame implements ActionListener {
     public static void main(String[] args) throws ClassNotFoundException {
         new Client();
     }
+        /* private void enregistrerLog(String log) throws SQLException {
+         Connection connection = DatabaseConnect.DatabaseConnection();
+         try (connection) {
+             PreparedStatement statement = (PreparedStatement) connection.prepareStatement("INSERT INTO log (message) VALUES (?)");
+             statement.setString(1, log);
+             statement.executeUpdate();
+         } catch (SQLException e) {
+             throw new RuntimeException(e);
+         }
+     }*/
 }
 
