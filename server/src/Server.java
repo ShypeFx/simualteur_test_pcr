@@ -42,9 +42,6 @@ public class Server {
                 // Connexion à la base de données
                 DatabaseConnect db = new DatabaseConnect();
 
-                //INUTILE
-                //BufferedWriter os = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
                 //line va contenir les informations envoyées par le client
                 String line;
                 //On execute cette partie en continu qui teste la validité des tests PCR
